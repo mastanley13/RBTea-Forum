@@ -1,0 +1,42 @@
+/* public/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    margin-bottom: 30px;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+  }
+  
+  .comment {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .comment strong {
+    display: block;
+    margin-bottom: 5px;
+  }
