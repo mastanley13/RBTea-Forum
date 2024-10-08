@@ -13,9 +13,20 @@ const socketIo = require('socket.io');
 const app = express();
 
 // Middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
+        fontSrc: ["'self'", 'fonts.gstatic.com', 'data:'],
+        imgSrc: ["'self'", 'data:'],
+        connectSrc: ["'self'"],
+      },
+    },
+  })
+);
 
 // Rate Limiting
 const limiter = rateLimit({
@@ -43,8 +54,19 @@ app.set('io', io);
 
 // Connect to MongoDB and Start Server
 const PORT = process.env.PORT || 5000;
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => console.error(err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('MongoDB connected successfully');
+  server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+})
+.catch(err => {
+  console.error('MongoDB connection error:', err.message);
+  console.error('Full error object:', err);
+  process.exit(1);
+});
+
+// Remove or comment out this line
+// server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

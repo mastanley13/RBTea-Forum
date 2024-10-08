@@ -1,23 +1,39 @@
-<!-- public/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Comment Forum</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Forum</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>Comment Forum</h1>
-    <form id="commentForm">
-      <input type="text" name="name" placeholder="Your Name" maxlength="50" required />
-      <textarea name="comment" placeholder="Your Comment" maxlength="500" required></textarea>
-      <button type="submit">Submit</button>
-    </form>
-    <div id="commentSection"></div>
-  </div>
-
-  <script src="main.js"></script>
+    <div class="container">
+        <header>
+            <h1>Comment Forum</h1>
+        </header>
+        <main>
+            <section class="comment-form">
+                <h2>Add a Comment</h2>
+                <form id="comment-form">
+                    <div class="form-group">
+                        <label for="comment-author">Name:</label>
+                        <input type="text" id="comment-author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-text">Comment:</label>
+                        <textarea id="comment-text" name="text" required></textarea>
+                    </div>
+                    <button type="submit">Post Comment</button>
+                </form>
+            </section>
+            <section class="comment-list">
+                <h2>Comments</h2>
+                <ul id="comment-list"></ul>
+            </section>
+        </main>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
